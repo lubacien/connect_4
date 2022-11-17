@@ -7,4 +7,4 @@ The game is available here:
 
 https://lubacien.github.io/connect_4/
 
-click the link and sned the join link to the friend you would like to play with
+click the link and send the join link to the friend you would like to play with

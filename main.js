@@ -1,11 +1,22 @@
 import { createBoard, playMove } from "./connect4.js";
 
-
+function getWebSocketServer() {
+  if (window.location.host === "lubacien.github.io") {
+    return "wss://connect4-lucien.herokuapp.com/";
+  } else if (window.location.host === "localhost:8000") {
+    return "ws://localhost:8001/";
+  } else {
+    throw new Error(`Unsupported host: ${window.location.host}`);
+  }
+}
 window.addEventListener("DOMContentLoaded", () => {
   // Initialize the UI.
   const board = document.querySelector(".board");
   createBoard(board);
-  const websocket = new WebSocket("ws://localhost:8001/");
+  const websocket = new WebSocket(getWebSocketServer());
+
+  //this is for local:
+  //const websocket = new WebSocket("ws://localhost:8001/");
   initGame(websocket);
   receiveMoves(board, websocket);
   sendMoves(board, websocket);

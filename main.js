@@ -63,8 +63,15 @@ websocket.addEventListener("message", ({ data }) => {
 }
 function initGame(websocket) {
   websocket.addEventListener("open", () => {
-    // Send an "init" event for the first player.
-    const event = { type: "init" };
+    // Send an "init" event according to who is connecting.
+    const params = new URLSearchParams(window.location.search);
+    let event = { type: "init" };
+    if (params.has("join")) {
+      // Second player joins an existing game.
+      event.join = params.get("join");
+    } else {
+      // First player starts a new game.
+    }
     websocket.send(JSON.stringify(event));
   });
 }
